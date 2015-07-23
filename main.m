@@ -43,7 +43,7 @@ fprintf('theta: \n');
 fprintf(' %f \n', theta);
 % Hacer cambios aca para hacer predicciones
 % De un nuevo cliente.
-prob = sigmoid([58 3 0 0 0 2143 1 -4 1 5 5 261 1 -1 0 1 0] * theta);
+prob = sigmoid([46  7  0  2  0  668  1  0  1  15  5  1263  2  -1  0  1  1] * theta);
 fprintf(['Probabilidad de Aceptacion de Oferta Mercadologica %f\n\n'], prob);
 
 % Compute accuracy on our training set
@@ -52,5 +52,4 @@ p = predict(theta, X);
 fprintf('Precisión del Train: %f\n', mean(double(p == y)) * 100);
 
 fprintf('\nFinalizacion del Programa\n');
-pause;
 
