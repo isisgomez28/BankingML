@@ -5,7 +5,7 @@ clear ; close all; clc
  X = data(:,[1:16]);
  y = data(:,[17]);
  [X_norm,mu,sig] = featureNormalize(data);
- plotData(X,y);
+
 %  Tamaño de la matriz
 [m, n] = size(X);
 
