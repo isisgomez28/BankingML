@@ -53,14 +53,14 @@ error_val   = zeros(m, 1);
 
 % ---------------------- Sample Solution ----------------------
 
-for i = 1:m
+for i = 1:100
     trainSubX = X (1:i, :);
     trainSubY = y (1:i);
     
-    theta = trainLinearReg(trainSubX, trainSubY, lambda);
+    theta = trainLogisticReg(trainSubX, trainSubY, lambda);
     
-    error_train (i) = linearRegCostFunction(trainSubX, trainSubY, theta, 0);
-    error_val (i) = linearRegCostFunction(Xval, yval, theta, 0);
+    error_train (i) = costFunctionReg(theta, trainSubX,trainSubY , 0);
+    error_val (i) = costFunctionReg(theta,Xval, yval , 0);
     
 end
 

@@ -4,8 +4,8 @@ function plotData(Xs, ys)
 %   and o for the negative examples. X is assumed to be a Mx2 matrix.
 
 % Create New Figure
-X = Xs([1:100],:);
-y = ys([1:100],:);
+X = Xs([1:4000],:);
+y = ys([1:4000],:);
 pos = find(y==1); 
 neg = find(y == 0);
 A = [1:length(X)];
