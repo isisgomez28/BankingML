@@ -20,7 +20,6 @@ t = theta(2:length(theta));
 J=(((transpose(-y)*log(sigmoid((X*theta))))-(transpose(1-y)*log(1-sigmoid(X*theta))))/m ) + (lambda/(2*m)*(sum(t.^2)));
 temp = theta;
 temp(1)=0;
-A= ((sigmoid(X*theta)-y)/m);
-grad =(A'*X)'+(lambda/m).*temp;
+grad =(((sigmoid(X*theta)-y)/m)'*X)'+(lambda/m).*temp;
 % =============================================================
 end
