@@ -3,6 +3,8 @@ function PlotData(X, y)
 %   PLOTDATA(x,y) plots the data points with + for the positive examples
 %   and o for the negative examples. X is assumed to be a Mx2 matrix.
 
+% Create New Figure
+figure; hold on;
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Plot the positive and negative examples on a
@@ -11,14 +13,13 @@ function PlotData(X, y)
 %
 
 % Find Indices of Positive and Negative Examples
+pos = find(y==1); 
+neg = find(y == 0);
 
 % Plot Examples
+plot(X(pos, 3), X(pos, 17), 'k+','LineWidth', 2, 'MarkerSize', 7);
+plot(X(neg, 1), X(neg, 2), 'ko', 'MarkerFaceColor', 'y', 'MarkerSize', 7);
 
-varNames = {'age'; 'job'; 'marital'; 'education'; 'default'; 'balance'; 
-            'housing'; 'loan'; 'contact'; 'day'; 'month'; 'duration'; 
-            'campaign'; 'pdays'; 'previous'};
-figure
-gplotmatrix(X(:,[3:2]),[],y,['r' 'b'],[],[],false);
 % =========================================================================
 
 hold off;

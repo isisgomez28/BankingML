@@ -19,19 +19,7 @@ grad = zeros(size(theta));
 %
 % Note: grad should have the same dimensions as theta
 %
-z = X*theta;
-h = sigmoid(z);
-positiveValue = -y .* log(h);
-negativeValue = (1 - y) .* (log(1 - h));
-
-J = (1/m) * (sum(positiveValue - negativeValue));
-
-for i = 1:m
-   grad = grad + (h(i)-y(i)) * X(i, :)'; 
-end
-
-grad = (1/m) * grad;
-
+J=((transpose(-y)*log(sigmoid((X*theta))))-(transpose(1-y)*log(1-sigmoid(X*theta))))/m;
+grad = transpose((sigmoid(X*theta)-y)/m)*X;
 % =============================================================
-
 end

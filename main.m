@@ -1,54 +1,18 @@
 %% Initialization
 clear ; close all; clc
+%% Cargando la Data
+ load('data.mat');
+ X = data(:,[1:16]);
+ y = data(:,[17]);
+ [X_norm,mu,sig] = featureNormalize(data);
 
-%% Load Data
-%  The first two columns contains the exam scores and the third column
-%  contains the label.
-
-data = load('DatasetInfo\cleanTrainingDS - Copy.txt');
-X = data(:, [1, 16]); y = data(:, 17);
-
-%% ==================== Part 1: Plotting ====================
-
-fprintf(['Plotting data with + indicating (y = 1) examples and o ' ...
-         'indicating (y = 0) examples.\n']);
-
-plotData(X, y);
-
-% Put some labels 
-hold on;
-% Labels and Legend
-xlabel('Exam 1 score')
-ylabel('Exam 2 score')
-
-% Specified in plot order
-legend('Admitted', 'Not admitted')
-hold off;
-
-fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
-
-fprintf('\nRunning PCA on example dataset.\n\n');
-
-%  Before running PCA, it is important to first normalize X
-[X_norm, mu, sigma] = featureNormalize(X);
-
-%  Run PCA
-[U, S] = pca(X_norm);
-
-%  Plot the normalized dataset (returned from pca)
-plot(X_norm(:, 1), X_norm(:, 2), 'bo');
-axis([-4 3 -4 3]); axis square
-
-%% ============ Part 2: Compute Cost and Gradient ============
-
-%  Setup the data matrix appropriately, and add ones for the intercept term
+%  Tamaño de la matriz
 [m, n] = size(X);
 
-% Add intercept term to x and X_test
+% Agregando una columna de 1
 X = [ones(m, 1) X];
 
-% Initialize fitting parameters
+% Initialize Theta con 0 
 initial_theta = zeros(n + 1, 1);
 
 % Compute and display initial cost and gradient
@@ -59,7 +23,6 @@ fprintf('Gradient at initial theta (zeros): \n');
 fprintf(' %f \n', grad);
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
 
 
 %% ============= Part 3: Optimizing using fminunc  =============
@@ -78,23 +41,9 @@ options = optimset('GradObj', 'on', 'MaxIter', 400);
 fprintf('Cost at theta found by fminunc: %f\n', cost);
 fprintf('theta: \n');
 fprintf(' %f \n', theta);
-
-% Plot Boundary
-plotDecisionBoundary(theta, X, y);
-
-% Put some labels 
-hold on;
-% Labels and Legend
-xlabel('Exam 1 score')
-ylabel('Exam 2 score')
-
-% Specified in plot order
-legend('Admitted', 'Not admitted')
-hold off;
-
 % Hacer cambios aca para hacer predicciones
 % De un nuevo cliente.
-prob = sigmoid([1 45 85] * theta);
+prob = sigmoid([58 3 0 0 0 2143 1 -4 1 5 5 261 1 -1 0 1 0] * theta);
 fprintf(['Probabilidad de Aceptacion de Oferta Mercadologica %f\n\n'], prob);
 
 % Compute accuracy on our training set
